@@ -32,7 +32,7 @@ export function AddScreen({
   return (
     <motion.div
       key={`add-${addMode}`}
-      initial={{ opacity: 0, y: 18 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -14 }}
       transition={{ duration: 0.35 }}
@@ -119,7 +119,7 @@ function PasteMode({
   onSwitch: () => void;
 }) {
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 space-y-4">
+    <motion.div initial={false} animate={{ opacity: 1 }} className="mt-4 space-y-4">
       <InfoCard
         accentClass="from-[#f7bbb7] to-[#ffd1b0]"
         eyebrow="STEP 1  PASTE A LINK"
@@ -171,7 +171,7 @@ function ShareMode({
   onSwitch: () => void;
 }) {
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 space-y-4">
+    <motion.div initial={false} animate={{ opacity: 1 }} className="mt-4 space-y-4">
       <InfoCard
         accentClass="from-[#c9e4d0] to-[#c9dff4]"
         eyebrow="STEP 1  SHARED IN"

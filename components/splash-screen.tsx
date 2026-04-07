@@ -12,7 +12,7 @@ export function SplashScreen({
   return (
     <motion.div
       key="splash"
-      initial={{ opacity: 0 }}
+      initial={false}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="relative h-full w-full overflow-hidden rounded-[36px] bg-[#b7d0e4]"

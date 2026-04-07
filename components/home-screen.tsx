@@ -24,7 +24,7 @@ export function HomeScreen({
   return (
     <motion.div
       key="home"
-      initial={{ opacity: 0, y: 18 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -14 }}
       transition={{ duration: 0.35 }}
@@ -107,7 +107,7 @@ function ArchiveCard({
     <motion.button
       type="button"
       onClick={onOpen}
-      initial={{ opacity: 0, y: 18 }}
+      initial={false}
       animate={{ opacity: 1, y: 0, rotate }}
       transition={{ duration: 0.35, delay: index * 0.05 }}
       className="relative block w-full text-left"
