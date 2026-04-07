@@ -41,10 +41,10 @@ export function SummaryScreen({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -16 }}
       transition={{ duration: 0.3 }}
-      className="flex h-full flex-col overflow-y-auto pt-4 pb-28"
+      className="flex h-full flex-col overflow-y-auto pt-4 pb-8"
     >
       <div className="flex items-center justify-between">
-        <button className="flex size-9 items-center justify-center rounded-full bg-[#66b237] text-white">‹</button>
+        <button className="flex size-9 items-center justify-center rounded-full bg-[#66b237] text-white">←</button>
         <p className="text-[30px] font-bold tracking-[-0.05em] text-[#272524]">月度总结</p>
         <button className="flex size-9 items-center justify-center rounded-full bg-white/86 text-[#8cd667]">↗</button>
       </div>
@@ -61,7 +61,7 @@ export function SummaryScreen({
           <KeywordPill className="right-3 top-[112px] bg-[#dcd1fb] text-[#7062be]" label={`${displayThemes[0]?.label ?? "运营"} ${displayThemes[0]?.count ?? 5}`} />
 
           <div className="mx-auto mt-6 flex h-[220px] w-[220px] items-center justify-center rounded-full border border-[#e7def7]">
-            <LingyaIp />
+            <MainLingya />
           </div>
           <p className="mt-3 text-center text-[18px] font-medium text-[#746960]">本月主偏好</p>
           <div className="mt-4 flex justify-center">
@@ -155,21 +155,27 @@ function SimpleSprout({ height }: { height: number }) {
   );
 }
 
-function LingyaIp() {
+function MainLingya() {
   return (
-    <div className="relative h-[130px] w-[112px]">
-      <div className="absolute left-1/2 top-0 h-8 w-2 -translate-x-1/2 rounded-full bg-[linear-gradient(180deg,#31d59f,#45c8dd)]" />
-      <div className="absolute left-[30px] top-0 h-6 w-9 -rotate-[24deg] rounded-[100%_0_100%_0] bg-[linear-gradient(180deg,#8ef07c,#47d59d)]" />
-      <div className="absolute right-[30px] top-0 h-6 w-9 rotate-[24deg] rounded-[0_100%_0_100%] bg-[linear-gradient(180deg,#8ef07c,#47d59d)]" />
-      <div className="absolute bottom-0 left-1/2 h-[108px] w-[100px] -translate-x-1/2 rounded-[52%_48%_56%_44%/60%_60%_40%_40%] bg-[radial-gradient(circle_at_50%_42%,#baffb7_0,#84f2c9_36%,#4dd2d8_68%,#41bfc7_100%)] shadow-[0_12px_24px_rgba(55,205,170,0.24)]" />
-      <div className="absolute bottom-[38px] left-1/2 h-[54px] w-[72px] -translate-x-1/2 rounded-[40px] bg-[radial-gradient(circle_at_50%_35%,#f7fff6,#d5fff4_70%,transparent_72%)]" />
-      <div className="absolute bottom-[66px] left-[34px] size-4 rounded-full bg-black" />
-      <div className="absolute bottom-[66px] right-[34px] size-4 rounded-full bg-black" />
-      <div className="absolute bottom-[68px] left-[38px] size-1.5 rounded-full bg-white" />
-      <div className="absolute bottom-[68px] right-[38px] size-1.5 rounded-full bg-white" />
-      <div className="absolute bottom-[48px] left-1/2 h-6 w-10 -translate-x-1/2 rounded-b-[20px] border-b-2 border-[#4d5c6f]" />
-      <div className="absolute bottom-[56px] left-[4px] h-8 w-6 rotate-[-32deg] rounded-full bg-[radial-gradient(circle,#fdf7ff,#bfe7ff_72%,transparent_74%)] blur-[0.2px]" />
-      <div className="absolute bottom-[56px] right-[4px] h-8 w-6 rotate-[32deg] rounded-full bg-[radial-gradient(circle,#fdf7ff,#bfe7ff_72%,transparent_74%)] blur-[0.2px]" />
+    <div className="relative h-[184px] w-[176px]">
+      <div className="absolute left-[74px] top-[12px] h-[36px] w-[8px] rotate-[-3deg] rounded-full bg-[linear-gradient(180deg,#59e0a9,#3bc8db)]" />
+      <div className="absolute left-[51px] top-[4px] h-[30px] w-[42px] -rotate-[30deg] rounded-[100%_0_100%_0] bg-[linear-gradient(180deg,#8ef07c,#47d59d)]" />
+      <div className="absolute left-[84px] top-[6px] h-[30px] w-[42px] rotate-[26deg] rounded-[0_100%_0_100%] bg-[linear-gradient(180deg,#8ef07c,#47d59d)]" />
+
+      <div className="absolute left-[31px] top-[44px] h-[142px] w-[116px] rotate-[-3deg] rounded-[52%_48%_50%_50%/60%_60%_40%_40%] bg-[radial-gradient(circle_at_50%_38%,#b8ffbb_0,#8ff1cd_36%,#51d7dd_72%,#41bfc7_100%)] shadow-[0_20px_38px_rgba(55,205,170,0.28)]" />
+      <div className="absolute left-[47px] top-[90px] h-[72px] w-[88px] rotate-[-3deg] rounded-[42px] bg-[radial-gradient(circle_at_50%_35%,#ffffff,#ddfff5_70%,transparent_72%)]" />
+
+      <div className="absolute left-[18px] top-[112px] h-[34px] w-[26px] -rotate-[28deg] rounded-full bg-[radial-gradient(circle,#fff7ff,#cfe7ff_72%,transparent_74%)] shadow-[inset_0_-4px_4px_rgba(0,0,0,0.12),inset_0_0_12px_5px_rgba(255,255,255,0.85)]" />
+      <div className="absolute right-[16px] top-[112px] h-[34px] w-[26px] rotate-[28deg] rounded-full bg-[radial-gradient(circle,#fff7ff,#cfe7ff_72%,transparent_74%)] shadow-[inset_0_-4px_4px_rgba(0,0,0,0.12),inset_0_0_12px_5px_rgba(255,255,255,0.85)]" />
+
+      <div className="absolute left-[61px] top-[110px] h-[19px] w-[19px] rounded-full bg-black" />
+      <div className="absolute left-[87px] top-[108px] h-[19px] w-[19px] rounded-full bg-black" />
+      <div className="absolute left-[67px] top-[114px] h-[6px] w-[6px] rounded-full bg-white" />
+      <div className="absolute left-[93px] top-[112px] h-[6px] w-[6px] rounded-full bg-white" />
+
+      <div className="absolute left-[67px] top-[138px] h-[14px] w-[44px] rotate-[-3deg] overflow-hidden">
+        <div className="h-[22px] w-[44px] rounded-b-[24px] border-b-[3px] border-[#4d5c6f]" />
+      </div>
     </div>
   );
 }

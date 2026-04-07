@@ -32,8 +32,7 @@ export function HomeScreen({
     >
       <div className="flex items-start justify-between">
         <h1 className="text-[30px] font-bold tracking-[-0.05em] text-[#2f2a28]">
-          全部灵感
-          <span className="ml-1 text-[28px]">🌱</span>
+          全部灵感<span className="ml-1 text-[28px]">🌱</span>
         </h1>
         <button
           type="button"
@@ -70,7 +69,7 @@ export function HomeScreen({
             </button>
           </div>
         ) : (
-          <div className="relative pt-2">
+          <div className="relative h-[560px] pt-2">
             {inspirations.map((item, index) => (
               <ArchiveCard
                 key={item.id}
@@ -100,9 +99,9 @@ function ArchiveCard({
 }) {
   const theme = getThemeFromKey(item.themeKey);
   const offsets = [
-    { rotate: 1.8, top: 0, width: "88%" },
-    { rotate: -2.2, top: -72, width: "83%" },
-    { rotate: 1.4, top: -144, width: "79%" },
+    { rotate: 1.2, top: 0, left: 8, width: 324, z: 30 },
+    { rotate: -1.8, top: 156, left: 0, width: 326, z: 20 },
+    { rotate: 1.4, top: 288, left: 12, width: 328, z: 10 },
   ];
   const layout = offsets[index % offsets.length];
 
@@ -113,8 +112,8 @@ function ArchiveCard({
       initial={false}
       animate={{ opacity: 1, y: 0, rotate: layout.rotate }}
       transition={{ duration: 0.3, delay: index * 0.04 }}
-      className="relative block text-left"
-      style={{ marginTop: index === 0 ? 0 : layout.top, width: layout.width }}
+      className="absolute block text-left"
+      style={{ top: layout.top, left: layout.left, width: layout.width, zIndex: layout.z }}
     >
       <div className="overflow-hidden rounded-[28px] shadow-[0_18px_28px_rgba(66,46,20,0.10)]">
         <div
@@ -122,7 +121,7 @@ function ArchiveCard({
           style={{ background: theme.surface }}
         >
           <div className="max-w-[66%]">
-            <p className="text-[14px] font-bold leading-[1.45] text-[#22201f]">{item.title}</p>
+            <p className="text-[16px] font-bold leading-[1.45] text-[#22201f]">{item.title}</p>
           </div>
           <span
             className="rounded-full px-3 py-[6px] text-[11px]"
@@ -145,16 +144,11 @@ function ArchiveCard({
             <Share2 className="size-4" />
           </button>
 
-          <p className="pr-12 text-[14px] leading-[2.05] text-[#5e534b]">
-            {item.summary}
-          </p>
+          <p className="pr-12 text-[14px] leading-[2.05] text-[#5e534b]">{item.summary}</p>
 
           <div className="mt-4 flex gap-2">
             {item.keywords.slice(0, 2).map((keyword) => (
-              <span
-                key={keyword}
-                className="rounded-full bg-[#f5f1ea] px-3 py-1 text-[11px] text-[#8b7d6f]"
-              >
+              <span key={keyword} className="rounded-full bg-[#f5f1ea] px-3 py-1 text-[11px] text-[#8b7d6f]">
                 {keyword}
               </span>
             ))}
