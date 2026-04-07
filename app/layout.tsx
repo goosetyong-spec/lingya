@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
 import { Noto_Sans_SC } from "next/font/google";
 import "./globals.css";
 
 const notoSansSc = Noto_Sans_SC({
   variable: "--font-noto-sans-sc",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "700", "900"],
 });
 
 export const metadata: Metadata = {
@@ -32,7 +33,7 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="zh-CN" className={`${notoSansSc.variable} h-full`}>

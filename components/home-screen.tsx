@@ -1,9 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, Share2, Sparkles } from "lucide-react";
+import { Search, Share2 } from "lucide-react";
 import { Inspiration, getThemeFromKey } from "@/lib/lingya-data";
-import { TopBar } from "@/components/lingya-ui";
 
 export function HomeScreen({
   inspirations,
@@ -12,6 +11,7 @@ export function HomeScreen({
   onOpenDetail,
   onOpenSummary,
   onOpenAdd,
+  onShare,
 }: {
   inspirations: Inspiration[];
   searchQuery: string;
@@ -19,174 +19,142 @@ export function HomeScreen({
   onOpenDetail: (item: Inspiration) => void;
   onOpenSummary: () => void;
   onOpenAdd: () => void;
+  onShare: (item: Inspiration) => void;
 }) {
   return (
     <motion.div
       key="home"
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -16 }}
+      exit={{ opacity: 0, y: -14 }}
       transition={{ duration: 0.35 }}
-      className="relative z-10 flex flex-col gap-4 pt-3"
+      className="relative z-10 flex h-full flex-col pt-6"
     >
-      <TopBar
-        title="灵芽"
-        subtitle="把灵感慢慢养成自己的判断"
-        left={
-          <div className="flex size-12 items-center justify-center rounded-3xl bg-[linear-gradient(180deg,#c4ef8d,#74d66c)] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]">
-            <span className="text-[20px]">🌱</span>
-          </div>
-        }
-        right={
-          <button
-            type="button"
-            onClick={onOpenAdd}
-            className="flex size-11 items-center justify-center rounded-full bg-[#2a2218] text-white shadow-lg shadow-amber-950/10 transition hover:scale-[1.02]"
-          >
-            <Sparkles className="size-5" />
-          </button>
-        }
-      />
+      <div className="relative flex items-start justify-between">
+        <div>
+          <h1 className="text-[28px] font-bold tracking-[-0.04em] text-[#333333]">全部灵感🌱</h1>
+        </div>
+        <button
+          type="button"
+          onClick={onOpenSummary}
+          className="mt-[3px] rounded-[18px] border border-white/60 bg-white/78 px-3 py-2 text-[13px] font-medium text-[#4c3d34] shadow-[0_8px_18px_rgba(74,56,31,0.10)]"
+        >
+          <span className="mr-2 text-[#80d658]">✦</span>月度总结
+        </button>
+      </div>
 
-      <motion.section
-        initial={{ opacity: 0, scale: 0.98 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.06, duration: 0.35 }}
-        className="rounded-[28px] border border-white/70 bg-white/70 p-3 shadow-[0_12px_34px_rgba(215,188,98,0.18)] backdrop-blur-md"
-      >
-        <div className="flex items-center gap-3 rounded-[22px] bg-white/85 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]">
-          <Search className="size-4 text-stone-400" />
+      <div className="mt-4 rounded-[28px] border border-white bg-white px-[18px] py-[14px] shadow-[0_10px_18px_rgba(74,56,31,0.06)]">
+        <div className="flex items-center gap-2">
+          <Search className="size-5 text-[#b6b0af]" />
           <input
             value={searchQuery}
             onChange={(event) => setSearchQuery(event.target.value)}
             placeholder="搜索灵感、关键词或笔记"
-            className="w-full bg-transparent text-sm text-stone-700 outline-none placeholder:text-stone-400"
+            className="w-full bg-transparent text-[15px] text-[#5b534d] outline-none placeholder:text-[#c7c2bf]"
           />
-          <button
-            type="button"
-            onClick={onOpenSummary}
-            className="shrink-0 rounded-full bg-[#f4f0ff] px-3 py-1.5 text-xs font-semibold text-[#7b63d4]"
-          >
-            月度总结
-          </button>
         </div>
-      </motion.section>
-
-      <div className="flex gap-2 overflow-x-auto pb-1">
-        {[
-          { label: "全部", count: inspirations.length },
-          { label: "有笔记", count: inspirations.filter((item) => item.notes).length },
-          { label: "视频", count: inspirations.filter((item) => item.sourceType === "视频").length },
-          { label: "教程", count: inspirations.filter((item) => item.sourceType === "教程").length },
-        ].map((pill, index) => (
-          <motion.button
-            key={pill.label}
-            type="button"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.08 + index * 0.03 }}
-            className={`rounded-full px-4 py-2 text-sm font-medium ${
-              index === 0
-                ? "bg-[#d8f0b9] text-[#35552f]"
-                : "border border-[#f0d8bf] bg-white/70 text-stone-600"
-            }`}
-          >
-            {pill.label} ({pill.count})
-          </motion.button>
-        ))}
       </div>
 
-      <div className="space-y-4">
-        {inspirations.map((item, index) => (
-          <InspirationCard key={item.id} item={item} index={index} onOpen={() => onOpenDetail(item)} />
-        ))}
+      <div className="relative mt-5 flex-1 overflow-y-auto pb-32">
+        {inspirations.length === 0 ? (
+          <div className="rounded-[28px] border border-white/70 bg-white/72 p-6 text-center shadow-[0_16px_28px_rgba(74,56,31,0.08)]">
+            <p className="text-[16px] font-semibold text-[#4a4038]">还没有找到匹配的灵感</p>
+            <p className="mt-2 text-[14px] leading-7 text-[#7e7268]">
+              试试换个关键词，或者直接新增一条链接。
+            </p>
+            <button
+              type="button"
+              onClick={onOpenAdd}
+              className="mt-5 rounded-full bg-[#eef9df] px-5 py-3 text-[14px] font-semibold text-[#4f7d41]"
+            >
+              去新增灵感
+            </button>
+          </div>
+        ) : (
+          <div className="relative pt-2">
+            {inspirations.map((item, index) => (
+              <ArchiveCard
+                key={item.id}
+                item={item}
+                index={index}
+                onOpen={() => onOpenDetail(item)}
+                onShare={() => onShare(item)}
+              />
+            ))}
+          </div>
+        )}
       </div>
-
-      {inspirations.length === 0 && (
-        <section className="rounded-[28px] border border-dashed border-white/70 bg-white/55 p-6 text-center shadow-[0_12px_34px_rgba(215,188,98,0.12)]">
-          <p className="text-base font-semibold text-stone-700">还没有匹配到灵感</p>
-          <p className="mt-2 text-sm leading-6 text-stone-500">试试换个关键词，或者直接新增一条新的链接。</p>
-        </section>
-      )}
     </motion.div>
   );
 }
 
-function InspirationCard({
+function ArchiveCard({
   item,
   index,
   onOpen,
+  onShare,
 }: {
   item: Inspiration;
   index: number;
   onOpen: () => void;
+  onShare: () => void;
 }) {
   const theme = getThemeFromKey(item.themeKey);
+  const rotate = index % 3 === 0 ? 2.2 : index % 3 === 1 ? -2.4 : 3.4;
+  const pullUp = index * 84;
 
   return (
     <motion.button
       type="button"
       onClick={onOpen}
-      initial={{ opacity: 0, y: 16, rotate: index % 2 === 0 ? -1.3 : 1.1 }}
-      animate={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -1.3 : 1.1 }}
-      whileHover={{ y: -4, rotate: 0 }}
-      transition={{ duration: 0.36, delay: index * 0.04 }}
-      className="group block w-full text-left"
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0, rotate }}
+      transition={{ duration: 0.35, delay: index * 0.05 }}
+      className="relative block w-full text-left"
+      style={{ marginTop: index === 0 ? 0 : -pullUp }}
     >
-      <div
-        className="relative overflow-hidden rounded-[34px] border border-white/70 p-5 shadow-[0_16px_38px_rgba(215,188,98,0.18)]"
-        style={{ background: theme.surface }}
-      >
+      <div className="rounded-[26px] shadow-[0_-2px_5px_rgba(255,255,255,0.34),0_16px_26px_rgba(59,41,20,0.09)]">
         <div
-          className="pointer-events-none absolute inset-x-10 top-0 h-20 rounded-full blur-3xl"
-          style={{ backgroundColor: theme.glow }}
-        />
-        <div className="relative z-10 flex items-start justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
-              <span
-                className="rounded-full px-2.5 py-1"
-                style={{ backgroundColor: theme.pill, color: theme.accent }}
-              >
-                {item.sourceType}
-              </span>
-              <span>{item.sourceName}</span>
-            </div>
-            <p className="mt-4 max-w-[15rem] text-[1.7rem] font-semibold leading-[1.05] tracking-tight text-stone-900">
-              {item.title}
-            </p>
-          </div>
-          <div className="rounded-full bg-white/70 p-3 transition group-hover:translate-y-[-2px]">
-            <Share2 className="size-4 text-stone-700" />
-          </div>
-        </div>
-
-        <p className="relative z-10 mt-4 max-w-[16rem] text-sm leading-6 text-stone-600">{item.summary}</p>
-
-        <div className="relative z-10 mt-5 flex flex-wrap gap-2">
-          {item.keywords.slice(0, 3).map((keyword) => (
-            <span
-              key={keyword}
-              className="rounded-full px-3 py-1.5 text-xs font-medium"
-              style={{ backgroundColor: theme.pill, color: theme.ink }}
-            >
-              {keyword}
-            </span>
-          ))}
-        </div>
-
-        <div className="relative z-10 mt-5 flex items-center justify-between">
-          <div className="flex gap-2 text-xs text-stone-500">
-            <span className="rounded-full bg-white/78 px-3 py-1.5">
-              {Math.max(180, item.summary.length * 4)} words
-            </span>
-            <span className="rounded-full bg-white/78 px-3 py-1.5">
-              {item.notes ? "1 note" : "0 note"}
-            </span>
-          </div>
-          <span className="flex size-12 items-center justify-center rounded-full bg-white/82 text-xl text-stone-700">
-            ↗
+          className="flex w-[212px] items-start gap-3 rounded-t-[18px] border border-white/50 px-4 pb-3 pt-4"
+          style={{ background: theme.surface }}
+        >
+          <p className="flex-1 text-[16px] font-bold text-[#1a1a1a]">{item.title}</p>
+          <span
+            className="rounded-full px-3 py-[5px] text-[12px]"
+            style={{ background: theme.badge, color: theme.accent }}
+          >
+            #{item.keywords[0] || item.sourceType}
           </span>
+        </div>
+
+        <div
+          className="relative rounded-b-[22px] rounded-tr-[22px] border border-white/50 px-5 py-[22px]"
+          style={{ background: theme.panel }}
+        >
+          <button
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              onShare();
+            }}
+            className="absolute right-4 top-4 flex size-8 items-center justify-center rounded-full bg-white/82 text-[#7c6c5e]"
+            aria-label="分享这条灵感"
+          >
+            <Share2 className="size-4" />
+          </button>
+
+          <p className="pr-10 text-[14px] leading-[31px]" style={{ color: theme.deepInk }}>
+            {item.summary}
+          </p>
+
+          <div
+            className="absolute bottom-5 right-7 h-9 rounded-[18px]"
+            style={{
+              width: `${118 + Math.min(item.summary.length, 60)}px`,
+              background: "linear-gradient(180deg, rgba(255,255,255,0.36), rgba(255,255,255,0))",
+              opacity: 0.7,
+            }}
+          />
         </div>
       </div>
     </motion.button>
