@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 
-const imgSplashFull = "https://www.figma.com/api/mcp/asset/e797d820-f5f8-46bf-bfd6-1ab4b6fd247d";
+const imgDenimBg = "/splash/denim-bg.png";
+const imgBuckle = "/splash/buckle.png";
 
 export function SplashScreen({ onOpen }: { onOpen: () => void }) {
   return (
@@ -14,16 +15,21 @@ export function SplashScreen({ onOpen }: { onOpen: () => void }) {
       exit={{ opacity: 0 }}
       onClick={onOpen}
       className="relative block h-full w-full overflow-hidden rounded-[36px] bg-[#fff6db] text-left"
-      aria-label="点击任意位置进入灵芽首页"
+      aria-label="鐐瑰嚮浠绘剰浣嶇疆杩涘叆鐏佃娊棣栭〉"
     >
       <img
-        alt="灵芽开屏"
-        src={imgSplashFull}
+        alt="鐏佃娊寮€灞忚儗鏅?
+        src={imgDenimBg}
         className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+      />
+      <img
+        alt=""
+        src={imgBuckle}
+        className="pointer-events-none absolute left-[184px] top-[300px] w-[220px] object-contain"
       />
       <div className="pointer-events-none absolute inset-x-0 bottom-[38px] flex justify-center">
         <div className="rounded-full bg-white/88 px-5 py-[10px] text-[13px] font-medium text-[#64584d]">
-          点击任意位置进入
+          鐐瑰嚮浠绘剰浣嶇疆杩涘叆
         </div>
       </div>
     </motion.button>
