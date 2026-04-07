@@ -7,6 +7,21 @@ export function SplashScreen({
 }: {
   onOpen: () => void;
 }) {
+  const layeredBackground = {
+    backgroundImage: [
+      "url('/splash/logo.png')",
+      "url('/splash/brain.png')",
+      "url('/splash/eyes.png')",
+      "url('/splash/heart.png')",
+      "url('/splash/slogan.png')",
+      "url('/splash/buckle.png')",
+      "url('/splash/denim-bg.png')",
+    ].join(", "),
+    backgroundRepeat: "no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat",
+    backgroundPosition: "34px 52px, -62px 242px, 42px 466px, 96px 700px, 48px 596px, 232px 316px, center",
+    backgroundSize: "308px auto, 176px auto, 108px auto, 128px auto, 292px auto, 124px auto, cover",
+  } as const;
+
   return (
     <motion.div
       key="splash"
@@ -14,49 +29,8 @@ export function SplashScreen({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="relative h-full w-full overflow-hidden rounded-[36px] bg-[#b7d0e4]"
+      style={layeredBackground}
     >
-      <img
-        src="/splash/denim-bg.png"
-        alt="灵芽开屏封面"
-        className="absolute inset-0 h-full w-full object-cover"
-      />
-
-      <img
-        src="/splash/logo.png"
-        alt=""
-        className="absolute left-[34px] top-[52px] w-[308px] rotate-[6deg] drop-shadow-[0_8px_18px_rgba(0,0,0,0.22)]"
-      />
-
-      <img
-        src="/splash/brain.png"
-        alt=""
-        className="absolute -left-[62px] top-[242px] w-[176px] rotate-[-28deg] drop-shadow-[0_6px_12px_rgba(0,0,0,0.2)]"
-      />
-
-      <img
-        src="/splash/eyes.png"
-        alt=""
-        className="absolute left-[42px] top-[466px] w-[108px] drop-shadow-[0_6px_10px_rgba(0,0,0,0.18)]"
-      />
-
-      <img
-        src="/splash/heart.png"
-        alt=""
-        className="absolute left-[96px] top-[700px] w-[128px] rotate-[18deg] drop-shadow-[0_10px_16px_rgba(0,0,0,0.2)]"
-      />
-
-      <img
-        src="/splash/slogan.png"
-        alt=""
-        className="absolute left-[48px] top-[596px] w-[292px] drop-shadow-[0_10px_20px_rgba(0,0,0,0.2)]"
-      />
-
-      <img
-        src="/splash/buckle.png"
-        alt=""
-        className="absolute left-[232px] top-[316px] w-[124px] drop-shadow-[0_8px_18px_rgba(0,0,0,0.18)]"
-      />
-
       <motion.button
         type="button"
         onClick={onOpen}
@@ -64,9 +38,9 @@ export function SplashScreen({
         animate={{ scale: [1, 1.02, 1] }}
         transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2.2 }}
         className="absolute left-[228px] top-[298px] h-[272px] w-[130px] rounded-[32px] focus:outline-none focus:ring-2 focus:ring-white/70 focus:ring-offset-2 focus:ring-offset-transparent"
-        aria-label="打开灵芽笔记本"
+        aria-label="Open Lingya notebook"
       >
-        <span className="sr-only">点击扣子进入首页</span>
+        <span className="sr-only">Tap the buckle to enter the home screen</span>
       </motion.button>
     </motion.div>
   );
