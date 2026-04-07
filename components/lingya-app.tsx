@@ -247,7 +247,7 @@ export function LingyaApp() {
 
   return (
     <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(255,244,189,0.7),_transparent_42%),linear-gradient(180deg,#fff6db_0%,#fff8ee_58%,#fff6dc_100%)] px-4 py-6 text-stone-800">
-      <div className="mx-auto flex min-h-[calc(100vh-3rem)] w-full max-w-[430px] flex-col overflow-hidden rounded-[36px] border border-white/60 bg-[rgba(255,250,239,0.72)] shadow-[0_24px_80px_rgba(215,180,85,0.22)] backdrop-blur-xl">
+      <div className="mx-auto flex h-[calc(100vh-3rem)] min-h-[760px] max-h-[844px] w-full max-w-[430px] flex-col overflow-hidden rounded-[36px] border border-white/60 bg-[rgba(255,250,239,0.72)] shadow-[0_24px_80px_rgba(215,180,85,0.22)] backdrop-blur-xl">
         <div className="relative flex-1 overflow-hidden px-5 pb-24">
           <div className="pointer-events-none absolute inset-x-8 top-3 h-44 rounded-full bg-[radial-gradient(circle,_rgba(255,235,145,0.6),_transparent_66%)] blur-2xl" />
 
