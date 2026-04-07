@@ -2,46 +2,32 @@
 
 import { motion } from "framer-motion";
 
-export function SplashScreen({
-  onOpen,
-}: {
-  onOpen: () => void;
-}) {
-  const layeredBackground = {
-    backgroundImage: [
-      "url('/splash/logo.png')",
-      "url('/splash/brain.png')",
-      "url('/splash/eyes.png')",
-      "url('/splash/heart.png')",
-      "url('/splash/slogan.png')",
-      "url('/splash/buckle.png')",
-      "url('/splash/denim-bg.png')",
-    ].join(", "),
-    backgroundRepeat: "no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat",
-    backgroundPosition: "34px 52px, -62px 242px, 42px 466px, 96px 700px, 48px 596px, 232px 316px, center",
-    backgroundSize: "308px auto, 176px auto, 108px auto, 128px auto, 292px auto, 124px auto, cover",
-  } as const;
-
+export function SplashScreen({ onOpen }: { onOpen: () => void }) {
   return (
-    <motion.div
+    <motion.button
       key="splash"
+      type="button"
       initial={false}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="relative h-full w-full overflow-hidden rounded-[36px] bg-[#b7d0e4]"
-      style={layeredBackground}
+      onClick={onOpen}
+      className="relative block h-full w-full overflow-hidden rounded-[36px] bg-[#b7d0e4] text-left"
+      aria-label="进入灵芽首页"
+      style={{
+        backgroundImage:
+          "url('/splash/logo.png'), url('/splash/brain.png'), url('/splash/eyes.png'), url('/splash/heart.png'), url('/splash/slogan.png'), url('/splash/buckle.png'), url('/splash/denim-bg.png')",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition:
+          "50% 10%, -8% 42%, 18% 63%, 50% 94%, 50% 78%, 82% 46%, center",
+        backgroundSize: "48% auto, 26% auto, 22% auto, 24% auto, 66% auto, 32% auto, cover",
+      }}
     >
-      <motion.button
-        type="button"
-        onClick={onOpen}
-        whileTap={{ scale: 0.97 }}
-        animate={{ scale: [1, 1.02, 1] }}
-        transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2.2 }}
-        className="absolute left-[228px] top-[298px] h-[272px] w-[130px] rounded-[32px] focus:outline-none focus:ring-2 focus:ring-white/70 focus:ring-offset-2 focus:ring-offset-transparent"
-        aria-label="Open Lingya notebook"
-      >
-        <span className="sr-only">Tap the buckle to enter the home screen</span>
-      </motion.button>
-    </motion.div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.14),_transparent_38%)]" />
+      <div className="absolute inset-x-0 bottom-10 flex justify-center">
+        <div className="rounded-full bg-white/72 px-4 py-2 text-[13px] font-medium text-[#64584d] shadow-[0_10px_18px_rgba(60,42,20,0.10)]">
+          点击任意位置进入
+        </div>
+      </div>
+    </motion.button>
   );
 }

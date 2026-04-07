@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { MoreHorizontal, Share2 } from "lucide-react";
+import { ArrowLeft, MoreHorizontal, Share2 } from "lucide-react";
 import { SourceCard } from "@/components/add-screen";
 import { CardTheme, Inspiration, getThemeFromKey } from "@/lib/lingya-data";
 
@@ -28,72 +28,68 @@ export function DetailOverlay({
           className="fixed inset-0 z-40 bg-[rgba(24,18,10,0.28)] px-4 py-6 backdrop-blur-sm"
         >
           <motion.div
-            initial={{ opacity: 0, y: 28, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 18, scale: 0.98 }}
-            className="mx-auto flex h-full w-full max-w-[430px] flex-col overflow-hidden rounded-[38px] border border-white/60 bg-[#fff3d3] shadow-[0_28px_80px_rgba(33,24,15,0.25)]"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 16 }}
+            className="mx-auto flex h-full w-full max-w-[430px] flex-col overflow-hidden rounded-[38px] border border-white/60 bg-[#f7eddc] shadow-[0_28px_80px_rgba(33,24,15,0.22)]"
           >
-            <div className="relative flex-1 overflow-y-auto px-5 pt-14">
-              <div className="absolute left-[118px] top-[230px] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(255,233,159,0.6),rgba(255,233,159,0)_65%)]" />
-
-              <div className="relative flex items-center justify-between">
+            <div className="flex-1 overflow-y-auto px-5 pt-5 pb-28">
+              <div className="flex items-center justify-between">
                 <button
                   type="button"
                   onClick={onClose}
-                  className="flex size-8 items-center justify-center rounded-full bg-[#5b4698] text-white"
+                  className="flex size-9 items-center justify-center rounded-full bg-[#6047b3] text-white"
                 >
-                  ←
+                  <ArrowLeft className="size-4" />
                 </button>
-                <div className="flex gap-2">
-                  <button
-                    type="button"
-                    onClick={() => onShare(inspiration)}
-                    className="flex size-8 items-center justify-center rounded-full bg-[#5b4698] text-white"
-                  >
-                    <Share2 className="size-4" />
-                  </button>
-                  <button type="button" className="flex size-8 items-center justify-center rounded-full bg-[#5b4698] text-white">
-                    <MoreHorizontal className="size-4" />
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  className="flex size-9 items-center justify-center rounded-full bg-[#6047b3] text-white"
+                >
+                  <MoreHorizontal className="size-4" />
+                </button>
               </div>
 
-              <div className="relative mt-4">
-                <p className="text-[11px] tracking-[0.2em] text-[rgba(122,94,56,0.86)]">No.001 INSPIRATION</p>
-                <h2 className="mt-2 text-[32px] font-bold tracking-[-0.04em] text-[#1a1a1a]">
-                  {inspiration.title}
-                </h2>
-                <p className="mt-2 text-[11px] tracking-[0.15em] text-[rgba(122,94,56,0.72)]">
-                  {inspiration.sourceTitle.toUpperCase()}
-                </p>
-              </div>
+              <p className="mt-6 text-[12px] tracking-[0.26em] text-[#9b866d]">No.001 INSPIRATION</p>
+              <h2 className="mt-3 text-[28px] font-bold leading-[1.18] tracking-[-0.05em] text-[#2e2928]">
+                {inspiration.title}
+              </h2>
+              <p className="mt-3 text-[12px] tracking-[0.2em] text-[#ad9880]">
+                {inspiration.sourceTitle.toUpperCase()}
+              </p>
 
-              <div className="relative mt-4 rounded-[34px] border border-white/60 bg-[rgba(255,254,249,0.76)] px-3 pb-24 pt-8 shadow-[0_16px_28px_rgba(77,59,26,0.08)]">
-                <div className="absolute right-4 top-[-18px] rotate-[-7deg] text-[42px] text-[#5b4698]">📎</div>
-
+              <div className="relative mt-4 rounded-[30px] bg-[rgba(255,254,250,0.82)] px-4 pb-5 pt-8 shadow-[0_14px_24px_rgba(61,41,20,0.08)]">
+                <div className="absolute right-5 top-3 text-[34px] text-[#6c52c8]">📏</div>
                 <SourceCard draft={inspiration} />
+                <InsightCard inspiration={inspiration} />
 
-                <DetailInsightCard inspiration={inspiration} />
-
-                <div className="mt-4 rounded-[24px] bg-[rgba(255,251,247,0.92)] p-5 shadow-[0_12px_20px_rgba(61,41,20,0.06)]">
+                <div className="mt-4 rounded-[24px] bg-white/92 p-5 shadow-[0_8px_18px_rgba(61,41,20,0.06)]">
                   <div className="flex items-center justify-between">
-                    <p className="text-[20px] font-bold text-[#2d1b5e]">前景展望</p>
-                    <p className="text-[11px] tracking-[0.2em] text-[rgba(123,91,196,0.8)]">OUTLOOK</p>
+                    <p className="text-[20px] font-bold text-[#372a67]">前景展望</p>
+                    <p className="text-[11px] tracking-[0.2em] text-[#8e7cd6]">OUTLOOK</p>
                   </div>
-                  <p className="mt-4 text-[14px] leading-[27px] text-[#4a3c31]">{inspiration.outlook}</p>
+                  <p className="mt-4 text-[14px] leading-[2] text-[#564941]">{inspiration.outlook}</p>
                 </div>
 
                 <button
                   type="button"
-                  onClick={onWriteNote}
-                  className="absolute inset-x-4 bottom-4 flex h-[62px] items-center justify-between rounded-[20px] border border-white/60 bg-white/82 px-5 shadow-[0_10px_18px_rgba(61,41,20,0.08)]"
+                  onClick={() => onShare(inspiration)}
+                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-[20px] bg-white/92 py-3 text-[14px] font-medium text-[#6d6158]"
                 >
-                  <span className="text-[16px] font-bold text-[#3c2e61]">🗒️ 写下我的想法</span>
-                  <span className="text-[11px] tracking-[0.15em] text-[rgba(125,89,196,0.88)]">
-                    SAVE A THOUGHT
-                  </span>
+                  <Share2 className="size-4" />
+                  分享这条灵感
                 </button>
               </div>
+            </div>
+
+            <div className="absolute inset-x-8 bottom-8 z-10">
+              <button
+                type="button"
+                onClick={onWriteNote}
+                className="w-full rounded-[22px] bg-[#6047b3] px-5 py-4 text-[18px] font-semibold text-white shadow-[0_16px_28px_rgba(60,41,140,0.28)]"
+              >
+                写下我的笔记
+              </button>
             </div>
           </motion.div>
         </motion.div>
@@ -102,19 +98,16 @@ export function DetailOverlay({
   );
 }
 
-function DetailInsightCard({ inspiration }: { inspiration: Inspiration }) {
+function InsightCard({ inspiration }: { inspiration: Inspiration }) {
   const theme = getThemeFromKey(inspiration.themeKey);
 
   return (
-    <div className="relative mt-4 rounded-[24px] p-5 shadow-[0_18px_28px_rgba(46,26,77,0.18)]" style={{ background: theme.surface }}>
-      <div className="absolute right-5 top-[-11px] -rotate-6 rounded-[9px] bg-[rgba(252,245,199,0.78)] px-4 py-[6px] text-[11px] text-[#5f4b24]">
-        AI 帮你记住
-      </div>
+    <div className="mt-4 rounded-[24px] p-5 shadow-[0_14px_24px_rgba(61,41,20,0.08)]" style={{ background: theme.surface }}>
       <div className="flex items-center justify-between">
-        <p className="text-[18px] font-bold text-[#4a4a4a]">AI 摘录卡</p>
-        <p className="text-[11px] tracking-[0.2em] text-[#613c9f]">CURATED NOTES</p>
+        <p className="text-[20px] font-bold text-[#2f2c2b]">AI 理解卡</p>
+        <p className="text-[11px] tracking-[0.2em] text-[#8a77cf]">CURATED NOTES</p>
       </div>
-      <p className="mt-4 whitespace-pre-line text-[14px] leading-[30px] text-[rgba(74,74,74,0.94)]">
+      <p className="mt-4 whitespace-pre-line text-[14px] leading-[2] text-[#4a423d]">
         {inspiration.summary}
       </p>
     </div>
@@ -147,49 +140,43 @@ export function NoteOverlay({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 bg-[rgba(14,11,8,0.52)] px-4 py-6 backdrop-blur-[2px]"
+          className="fixed inset-0 z-50 bg-[rgba(16,12,8,0.36)] backdrop-blur-[2px]"
         >
-          <div className="mx-auto flex h-full w-full max-w-[430px] flex-col justify-end">
+          <div className="flex h-full items-end justify-center px-4 pb-0 pt-20">
             <motion.div
               initial={{ opacity: 0, y: 36 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 18 }}
-              className="overflow-hidden rounded-[30px] border border-white/70 shadow-[0_24px_64px_rgba(25,17,8,0.25)]"
-              style={{ background: theme.surface }}
+              className="w-full max-w-[430px] rounded-t-[30px] bg-[linear-gradient(180deg,#f5f0ff,#f8f4ff)] px-5 pb-6 pt-3 shadow-[0_-12px_40px_rgba(41,28,98,0.12)]"
             >
-              <div className="bg-white/30 px-5 py-5">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-[24px] font-bold leading-tight text-[#1e1a17]">{title}</p>
-                    <p className="mt-2 text-[14px] leading-6 text-[#5f544d]">{subtitle}</p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={onClose}
-                    className="rounded-full bg-white/78 px-3 py-2 text-[12px] font-medium text-[#6f655f]"
-                  >
-                    关闭
-                  </button>
-                </div>
+              <div className="mx-auto h-1.5 w-14 rounded-full bg-[#c9bcf3]" />
+
+              <div className="mt-5 flex items-center justify-between text-[16px] text-[#6959b9]">
+                <button type="button" onClick={onClose}>取消</button>
+                <p className="text-[18px] font-bold text-[#473d7f]">{title}</p>
+                <button type="button" onClick={onSave}>完成</button>
               </div>
 
-              <div className="bg-white/76 p-5">
+              <div className="mt-5 rounded-[24px] bg-white px-5 py-4 shadow-[0_10px_20px_rgba(70,56,130,0.06)]">
                 <textarea
                   value={value}
                   onChange={(event) => onChange(event.target.value)}
-                  placeholder="比如：它为什么打动我、我想把哪一步拿去试、或者我觉得它真正可行的地方在哪里。"
-                  className="min-h-[180px] w-full resize-none rounded-[24px] bg-white/88 p-4 text-[14px] leading-7 text-[#4d433b] outline-none placeholder:text-[#b0a59d]"
+                  placeholder="开始写吧，这颗种子的未来可能性是..."
+                  className="min-h-[240px] w-full resize-none bg-transparent text-[14px] leading-[2] text-[#4e475f] outline-none placeholder:text-[#b7addd]"
                 />
-
-                <button
-                  type="button"
-                  onClick={onSave}
-                  className="mt-4 h-14 w-full rounded-[20px] text-[16px] font-semibold text-white shadow-[0_18px_28px_rgba(32,24,15,0.18)]"
-                  style={{ backgroundColor: theme.accent }}
-                >
-                  保存这条想法
-                </button>
+                <div className="mt-4 h-1 rounded-full bg-[#ded4fb]" />
               </div>
+
+              <button
+                type="button"
+                onClick={onSave}
+                className="mt-5 h-14 w-full rounded-[20px] text-[18px] font-semibold text-white shadow-[0_18px_28px_rgba(60,41,140,0.2)]"
+                style={{ backgroundColor: theme.key === "navy" ? "#4e6ea6" : "#6047b3" }}
+              >
+                保存笔记
+              </button>
+
+              <p className="mt-3 text-[13px] leading-6 text-[#9186b0]">{subtitle}</p>
             </motion.div>
           </div>
         </motion.div>
