@@ -14,7 +14,6 @@ import {
   collectContentStats,
   collectGrowthThemes,
   collectTopKeywords,
-  getThemeFromKey,
   Inspiration,
   pickRandomTheme,
   seedInspirations,
@@ -88,9 +87,6 @@ export function LingyaApp() {
 
   const selectedInspiration =
     inspirations.find((item) => item.id === selectedId) ?? inspirations[0] ?? null;
-  const noteTheme = getThemeFromKey(
-    draft?.themeKey ?? selectedInspiration?.themeKey ?? seedInspirations[0].themeKey,
-  );
 
   function openNotebook() {
     startTransition(() => {
@@ -248,7 +244,17 @@ export function LingyaApp() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top,_rgba(255,244,189,0.7),_transparent_42%),linear-gradient(180deg,#fff6db_0%,#fff8ee_58%,#fff6dc_100%)] text-stone-800 sm:px-4 sm:py-6">
       <div className="mx-auto flex h-[min(844px,100dvh)] w-full max-w-[390px] flex-col overflow-hidden rounded-[36px] border border-white/60 bg-[rgba(255,250,239,0.72)] shadow-[0_24px_80px_rgba(215,180,85,0.22)] backdrop-blur-xl">
-        <div className={`relative flex-1 overflow-hidden ${stage === "splash" ? "" : "px-5 pb-24"}`}>
+        <div
+          className={`relative flex-1 overflow-hidden ${
+            stage === "splash"
+              ? ""
+              : activeTab === "home"
+                ? ""
+                : activeTab === "summary"
+                  ? "px-5"
+                  : "px-5 pb-24"
+          }`}
+        >
           {stage !== "splash" && (
             <div className="pointer-events-none absolute inset-x-8 top-3 h-44 rounded-full bg-[radial-gradient(circle,_rgba(255,235,145,0.6),_transparent_66%)] blur-2xl" />
           )}
@@ -331,7 +337,7 @@ export function LingyaApp() {
 
       <NoteOverlay
         open={noteOpen}
-        theme={noteTheme}
+        theme={pickRandomTheme(selectedInspiration?.themeKey)}
         value={noteValue}
         onChange={setNoteValue}
         onClose={() => setNoteOpen(false)}
@@ -339,8 +345,7 @@ export function LingyaApp() {
         title={draft ? "写下你现在的想法" : "补一条自己的理解"}
         subtitle={
           draft
-            ? "把这条灵感真正收进你的判断里。"
-            : "让这条收藏慢慢长成你自己的理解，而不是只停留在看过。"
+            ? "把这条灵感真正收进你的判断里。" : "让这条收藏慢慢长成你自己的理解，而不是只停留在看过。"
         }
       />
     </main>
